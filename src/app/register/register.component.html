@@ -1,0 +1,30 @@
+<div
+  class="h-full bg-[url('https://images.frandroid.com/wp-content/uploads/2022/10/netflix-octobre-contenus-2022.jpg')]">
+  <div class="h-full bg-black bg-opacity-75 flex justify-center items-center">
+    <div class="max-w-[640px] w-full bg-black bg-opacity-50 rounded-sm p-16">
+      <div>
+        <h2 class="text-white text-5xl mb-16">Register</h2>
+
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div>
+            <label for=""></label>
+            <input type="text" formControlName="email">
+          </div>
+
+          <div>
+            <label for=""></label>
+            <input type="password" formControlName="password">
+          </div>
+
+          <div>
+            <button type="submit" class="btn-primary">Register</button>
+          </div>
+        </form>
+
+        <div>
+          <a routerLink="/login" class="text-white">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
