@@ -27,7 +27,6 @@ export class LoginComponent {
     if (this.form.valid) {
       console.log(this.form.value);
       this.authService.login(this.form.value.email!, this.form.value.password!).subscribe((response: any) => {
-        console.log(response)
         localStorage.setItem('JWT_TOKEN', response.token);
         this.router.navigate(['/profile']);
       });
