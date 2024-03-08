@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { FloatingInputLabelDirective } from '../shared/directives/floating-input-label.directive';
 
 @Component({
   selector: 'app-login',
@@ -10,25 +11,35 @@ import { Router, RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    FloatingInputLabelDirective
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   public form = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   });
+
+  public formError: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   public submit() {
     if (this.form.valid) {
-      console.log(this.form.value);
-      this.authService.login(this.form.value.email!, this.form.value.password!).subscribe((response: any) => {
-        localStorage.setItem('JWT_TOKEN', response.token);
-        this.router.navigate(['/profile']);
+      this.formError = false;
+
+      this.authService.login(this.form.value.email!, this.form.value.password!).subscribe({
+        next: (response: any) => {
+          this.authService.setToken(response.token);
+          this.router.navigate(['/profile']);
+        },
+        error: (error: any) => {
+          console.error('There was an error!', error);
+          this.formError = true;
+        }
       });
     }
   }

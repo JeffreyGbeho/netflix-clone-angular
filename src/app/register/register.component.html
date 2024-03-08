@@ -6,22 +6,23 @@
         <h2 class="text-white text-5xl mb-16">Register</h2>
 
         <form [formGroup]="form" (ngSubmit)="submit()">
-          <div>
-            <label for=""></label>
-            <input type="text" formControlName="email">
+          <div class="form-field">
+            <label for="email" id="emailLabel">Email</label>
+            <input floating labelId="emailLabel" type="text" id="email" formControlName="email" class="w-full p-4 bg-[#333] rounded-md text-white outline-none focus:bg-[#454545]">
+          </div>
+
+          <div class="form-field">
+            <label for="password" id="passwordLabel">Password</label>
+            <input floating labelId="passwordLabel" type="password" id="password" formControlName="password" class="w-full p-4 bg-[#333] rounded-md text-white outline-none focus:bg-[#454545]">
           </div>
 
           <div>
-            <label for=""></label>
-            <input type="password" formControlName="password">
-          </div>
-
-          <div>
-            <button type="submit" class="btn-primary">Register</button>
+            <button type="submit" class="text-white text-center py-4 rounded-md font-bold bg-[#e50914] w-full px-16">Register</button>
           </div>
         </form>
 
         <div>
+          <span>Already an account ? </span>
           <a routerLink="/login" class="text-white">Login</a>
         </div>
       </div>

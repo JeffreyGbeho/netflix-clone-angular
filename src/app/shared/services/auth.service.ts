@@ -9,19 +9,23 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  public setToken(token: string): void {
+    localStorage.setItem('JWT_TOKEN', token);
+  }
+
   public getToken(): string | null {
     return localStorage.getItem('JWT_TOKEN');
   }
 
   isTokenValid(token: string): boolean {
-        try {
-            const decodedToken: any = jwtDecode(token);
-            const currentTime = Date.now() / 1000;
-            return decodedToken.exp > currentTime;
-        } catch (error) {
-            return false;
-        }
-    }
+      try {
+          const decodedToken: any = jwtDecode(token);
+          const currentTime = Date.now() / 1000;
+          return decodedToken.exp > currentTime;
+      } catch (error) {
+          return false;
+      }
+  }
 
   public login(email: string, password: string) {
     return this.http.post('http://localhost:8080/api/auth/login', { email, password });

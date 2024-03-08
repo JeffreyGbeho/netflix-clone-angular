@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { FloatingInputLabelDirective } from '../shared/directives/floating-input-label.directive';
 
 @Component({
   selector: 'app-register',
@@ -10,25 +11,24 @@ import { Router, RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    FloatingInputLabelDirective
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
  public form = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   });
 
   constructor(private authService: AuthService, private router: Router) { }
 
   public submit() {
     if (this.form.valid) {
-      console.log(this.form.value);
       this.authService.register(this.form.value.email!, this.form.value.password!).subscribe((response: any) => {
-        console.log(response)
-        localStorage.setItem('JWT_TOKEN', response.token);
+        this.authService.setToken(response.token);
         this.router.navigate(['/profile']);
       });
     }
