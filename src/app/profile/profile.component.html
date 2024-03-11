@@ -1,12 +1,44 @@
-<h1>Gestion des profils</h1>
+<main class="bg-[#141414] w-screen h-screen flex items-center justify-center">
+  <section>
+    @if (state === "Select") {
+    <h1 class="text-center font-bold text-white text-xxl">Who's watching ?</h1>
+    } @else if (state === "Manage") {
+    <h1 class="text-center font-bold text-white text-xxl">Manage Profiles :</h1>
+    }
 
-<div>
-  <div *ngFor="let profile of profiles">
-    <div>
-      <span>{{ profile.name }}</span>
-      <!-- <button (click)="deleteProfile(profile.id)">Supprimer</button> -->
+    <div class="my-8">
+      <ul class="flex gap-8">
+        @for (profile of profiles; track profile.name) {
+        <li class="text-center">
+          <a (click)="handleProfile(profile)" class="cursor-pointer">
+            <div>
+              <img
+                [src]="profile.pictureUrl"
+                [alt]="profile.name"
+                width="150"
+              />
+            </div>
+            <span class="inline-block mt-2 text-[#808080]">{{
+              profile.name
+            }}</span>
+          </a>
+        </li>
+        }
+        <li class="text-center">
+          <a (click)="createProfile()" class="cursor-pointer">
+            <div class="w-[150px] h-[150px] bg-[#808080]"></div>
+            <span class="inline-block mt-2 text-[#808080]">Add profile</span>
+          </a>
+        </li>
+      </ul>
     </div>
-  </div>
-</div>
 
-<button (click)="createProfile()">Ajouter un nouveau profil</button>
+    <div class="text-center">
+      @if (state === "Select") {
+      <button (click)="switchState()">Manage profiles</button>
+      } @else if (state === "Manage") {
+      <button (click)="switchState()">Done</button>
+      }
+    </div>
+  </section>
+</main>

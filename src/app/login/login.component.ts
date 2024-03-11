@@ -34,7 +34,7 @@ export class LoginComponent {
       this.authService.login(this.form.value.email!, this.form.value.password!).subscribe({
         next: (response: any) => {
           this.authService.setToken(response.token);
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/profiles']);
         },
         error: (error: any) => {
           console.error('There was an error!', error);

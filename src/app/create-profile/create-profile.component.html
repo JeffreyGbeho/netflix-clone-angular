@@ -1,0 +1,28 @@
+<main class="bg-[#141414] w-screen h-screen flex items-center justify-center">
+  <section>
+    <h1 class="text-center font-bold text-white text-xxl">Add Profile</h1>
+    <p>Add a profile for another person watchign Netflix</p>
+
+    <form [formGroup]="form">
+      <div>image</div>
+      <div>
+        <input type="text" placeholder="Name" formControlName="name" />
+      </div>
+
+      <div>
+        <label for="child">Kid</label>
+        <input
+          type="checkbox"
+          ud="child"
+          placeholder="Name"
+          formControlName="child"
+        />
+      </div>
+    </form>
+
+    <div>
+      <button (click)="createProfile()">Continue</button>
+      <button [routerLink]="['/profiles']">Cancel</button>
+    </div>
+  </section>
+</main>

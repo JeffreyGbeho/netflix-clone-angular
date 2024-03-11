@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  public saveProfile(profile: any) {
-    return this.http.post('http://localhost:8080/api/profile', profile);
+  public saveProfile(profile: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/api/profile', profile);
   }
 
   public getProfiles() {

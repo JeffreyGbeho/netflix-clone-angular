@@ -29,7 +29,7 @@ export class RegisterComponent {
     if (this.form.valid) {
       this.authService.register(this.form.value.email!, this.form.value.password!).subscribe((response: any) => {
         this.authService.setToken(response.token);
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profiles']);
       });
     }
   }
