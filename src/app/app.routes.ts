@@ -4,6 +4,7 @@ import { RegisterComponent } from './pages/auth/components/register/register.com
 import { authGuard } from './core/guards/auth.guard';
 import { ManageProfileComponent } from './pages/profile/components/manage-profile/manage-profile.component';
 import { CreateProfileComponent } from './pages/profile/components/create-profile/create-profile.component';
+import { EditProfileComponent } from './pages/profile/components/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
   { path: 'profiles', redirectTo: '/profiles/manage', pathMatch: 'full' },
@@ -42,6 +43,10 @@ export const routes: Routes = [
       {
         path: 'add',
         component: CreateProfileComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: EditProfileComponent,
       },
     ],
   },

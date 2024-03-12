@@ -6,12 +6,11 @@
       @for (profile of profiles; track profile.name) {
       <li class="text-center">
         <a
-          [routerLink]="['/routePath']"
-          routerLinkActive="router-link-active"
+          [routerLink]="['/profiles/edit', profile.id]"
           class="group cursor-pointer"
         >
           <div
-            class="w-[150px] h-[150px] rounded-md border border-4 border-transparent rounded-md overflow-hidden bg-cover group-hover:border-[#808080]"
+            class="w-[150px] h-[150px] rounded-md border-4 border-transparent overflow-hidden bg-cover group-hover:border-[#808080]"
             [ngClass]="test(profile.pictureUrl)"
           >
             <div

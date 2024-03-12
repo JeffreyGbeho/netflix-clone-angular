@@ -15,4 +15,21 @@ export class ProfileService {
   public getProfiles() {
     return this.http.get<any>('http://localhost:8080/api/profile');
   }
+
+  public getProfileById(id: string) {
+    return this.http.get<any>(`http://localhost:8080/api/profile/${id}`);
+  }
+
+  public updateProfile(profile: any) {
+    console.log(profile);
+    console.log(profile.id);
+    return this.http.put<any>(
+      `http://localhost:8080/api/profile/${profile.id}`,
+      profile
+    );
+  }
+
+  public deleteProfile(id: string) {
+    return this.http.delete<any>(`http://localhost:8080/api/profile/${id}`);
+  }
 }

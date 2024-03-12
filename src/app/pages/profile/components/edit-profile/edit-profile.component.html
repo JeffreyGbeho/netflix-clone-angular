@@ -1,0 +1,39 @@
+<section>
+  <h1 class="font-bold text-white text-4xl">Edit Profile</h1>
+
+  <div class="py-4 border-y border-1 border-[#808080]">
+    <form [formGroup]="form" class="flex items-center gap-4">
+      <div class="h-[100px] w-[100px] bg-[#808080]"></div>
+
+      <div>
+        <input
+          type="text"
+          placeholder="Name"
+          formControlName="name"
+          class="px-4 py-1 text-white outline-none bg-[#808080]"
+        />
+      </div>
+    </form>
+  </div>
+
+  <div class="mt-4 flex gap-4">
+    <button
+      (click)="updateProfile()"
+      class="bg-white text-black px-6 py-2 hover:bg-[#e50914] hover:text-white"
+    >
+      Continue
+    </button>
+    <button
+      [routerLink]="['/profiles']"
+      class="border border-1 border-[#808080] px-6 py-2 text-[#808080] hover:border-white hover:text-white"
+    >
+      Cancel
+    </button>
+    <button
+      (click)="deleteProfile()"
+      class="border border-1 border-[#808080] px-6 py-2 text-[#808080] hover:border-white hover:text-white"
+    >
+      Delete Profile
+    </button>
+  </div>
+</section>
