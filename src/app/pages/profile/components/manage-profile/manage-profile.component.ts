@@ -32,7 +32,7 @@ export class ManageProfileComponent implements OnInit {
     });
   }
 
-  public createProfile() {
-    this.router.navigate(['/profiles/create']);
+  public addProfile() {
+    this.router.navigate(['/profiles/add']);
   }
 }

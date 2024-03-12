@@ -1,28 +1,49 @@
-<main class="bg-[#141414] w-screen h-screen flex items-center justify-center">
-  <section>
-    <h1 class="text-center font-bold text-white text-xxl">Add Profile</h1>
-    <p>Add a profile for another person watchign Netflix</p>
+<section>
+  <h1 class="font-bold text-white text-4xl">Add Profile</h1>
+  <p class="my-4">Add a profile for another person watchign Netflix</p>
 
-    <form [formGroup]="form">
-      <div>image</div>
+  <div class="py-4 border-y border-1 border-[#808080]">
+    <form [formGroup]="form" class="flex items-center gap-4">
+      <div class="h-[100px] w-[100px] bg-[#808080]"></div>
+
       <div>
-        <input type="text" placeholder="Name" formControlName="name" />
+        <input
+          type="text"
+          placeholder="Name"
+          formControlName="name"
+          class="px-4 py-1 text-white outline-none bg-[#808080]"
+        />
       </div>
 
-      <div>
-        <label for="child">Kid</label>
+      <div class="form-group-checkbox tooltip">
         <input
           type="checkbox"
-          ud="child"
+          id="child"
           placeholder="Name"
           formControlName="child"
         />
+        <label for="child" class="text-white">Kid?</label>
+
+        <span class="tooltiptext"
+          >If selected, this profile will only see TV shows and movies rated for
+          ages 12 and under.</span
+        >
       </div>
     </form>
+  </div>
 
-    <div>
-      <button (click)="createProfile()">Continue</button>
-      <button [routerLink]="['/profiles']">Cancel</button>
-    </div>
-  </section>
-</main>
+  <div class="mt-4 flex gap-4">
+    <button
+      (click)="createProfile()"
+      class="bg-white text-black px-6 py-2 hover:bg-[#e50914] hover:text-white"
+    >
+      Continue
+    </button>
+    <button
+      [routerLink]="['/profiles']"
+      class="border border-1 border-[#808080] px-6 py-2 text-[#808080] hover:border-white hover:text-white"
+    >
+      Cancel
+    </button>
+  </div>
+</section>
