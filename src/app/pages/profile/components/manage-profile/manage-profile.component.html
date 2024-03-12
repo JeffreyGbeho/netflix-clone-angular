@@ -1,0 +1,58 @@
+<main class="bg-[#141414] w-screen h-screen flex items-center justify-center">
+  <section>
+    <h1 class="text-center font-bold text-white text-4xl">Manage Profiles :</h1>
+
+    <div class="my-8">
+      <ul class="flex gap-8">
+        @for (profile of profiles; track profile.name) {
+        <li class="text-center">
+          <a
+            [routerLink]="['/routePath']"
+            routerLinkActive="router-link-active"
+            class="group cursor-pointer"
+          >
+            <div
+              class="w-[150px] h-[150px] rounded-md border border-4 border-transparent rounded-md overflow-hidden bg-cover group-hover:border-[#808080]"
+              [ngClass]="test(profile.pictureUrl)"
+            >
+              <div
+                class="bg-black bg-opacity-50 h-full w-full flex items-center justify-center"
+              >
+                <fa-icon [icon]="faEdit" class="text-4xl text-white"></fa-icon>
+              </div>
+            </div>
+            <span
+              class="inline-block mt-2 text-[#808080] group-hover:text-white"
+              >{{ profile.name }}</span
+            >
+          </a>
+        </li>
+        }
+        <li class="text-center">
+          <a (click)="createProfile()" class="group cursor-pointer">
+            <div
+              class="w-[150px] h-[150px] flex items-center justify-center rounded-md group-hover:bg-white"
+            >
+              <fa-icon
+                [icon]="faCirclePlus"
+                class="text-8xl text-[#808080]"
+              ></fa-icon>
+            </div>
+            <span
+              class="inline-block mt-2 text-[#808080] group-hover:text-white"
+              >Add profile</span
+            >
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="text-center mt-16">
+      <button
+        class="bg-white text-black px-6 py-2 hover:bg-[#e50914] hover:text-white"
+      >
+        Done
+      </button>
+    </div>
+  </section>
+</main>

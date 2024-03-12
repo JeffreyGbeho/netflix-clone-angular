@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProfileService } from '../shared/services/profile.service';
+import { ProfileService } from '../../../../shared/services/profile.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({

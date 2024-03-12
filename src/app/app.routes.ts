@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/auth/components/login/login.component';
 import { RegisterComponent } from './pages/auth/components/register/register.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from './core/guards/auth.guard';
+import { ManageProfileComponent } from './pages/profile/components/manage-profile/manage-profile.component';
 
 export const routes: Routes = [
   {
@@ -22,15 +23,24 @@ export const routes: Routes = [
   },
   {
     path: 'profiles',
-    component: ProfileComponent,
+    loadComponent: () =>
+      import('./pages/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
     canActivate: [authGuard],
+    children: [
+      {
+        path: 'manage',
+        component: ManageProfileComponent,
+      },
+    ],
   },
   {
     path: 'profiles/create',
     loadComponent: () =>
-      import('./create-profile/create-profile.component').then(
-        (m) => m.CreateProfileComponent
-      ),
+      import(
+        './pages/profile/components/create-profile/create-profile.component'
+      ).then((m) => m.CreateProfileComponent),
     canActivate: [authGuard],
   },
   {
@@ -41,8 +51,9 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard],
   },
+  { path: 'profiles', redirectTo: '/profiles/manage', pathMatch: 'full' },
   {
-    path: '**',
+    path: '',
     redirectTo: '/login',
     pathMatch: 'full',
   },
