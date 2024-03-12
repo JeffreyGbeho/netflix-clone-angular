@@ -1,0 +1,13 @@
+<div class="netflix_logo">
+  <img [src]="LOGO_URL" alt="Logo Netflix" />
+</div>
+
+<div class="h-full" [ngStyle]="{ 'background-image': 'url(' + BG_URL + ')' }">
+  <div class="h-full bg-black bg-opacity-75 flex justify-center items-center">
+    <div class="max-w-[640px] w-full bg-black bg-opacity-50 rounded-sm p-16">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
