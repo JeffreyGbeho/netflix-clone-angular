@@ -30,11 +30,11 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  public submit() {
+  public submit(): void {
     if (this.form.valid) {
       this.authService
         .register(this.form.value.email!, this.form.value.password!)
-        .subscribe((response: any) => {
+        .subscribe((response) => {
           this.authService.setToken(response.token);
           this.router.navigate(['/browse']);
         });

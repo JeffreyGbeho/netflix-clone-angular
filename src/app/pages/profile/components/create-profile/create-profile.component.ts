@@ -23,15 +23,11 @@ export class CreateProfileComponent {
 
   constructor(private profileService: ProfileService, private router: Router) {}
 
-  public createProfile() {
+  public createProfile(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
-      this.profileService
-        .saveProfile(this.form.getRawValue())
-        .subscribe((response) => {
-          console.log(response);
-          this.router.navigate(['/profiles']);
-        });
+      this.profileService.saveProfile(this.form.getRawValue()).subscribe(() => {
+        this.router.navigate(['/profiles']);
+      });
     }
   }
 }

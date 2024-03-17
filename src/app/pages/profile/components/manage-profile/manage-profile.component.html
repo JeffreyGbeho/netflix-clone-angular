@@ -10,7 +10,7 @@
         <a (click)="handleProfile(profile)" class="group cursor-pointer">
           <div
             class="w-[150px] h-[150px] rounded-md border-4 border-transparent overflow-hidden bg-cover group-hover:border-[#808080]"
-            [ngClass]="test(profile.pictureUrl)"
+            [ngClass]="getThumbnailOfProfile(profile.pictureUrl)"
           >
             @if (manageProfile) {
 

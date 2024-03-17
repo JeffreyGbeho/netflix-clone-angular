@@ -32,18 +32,18 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  public submit() {
+  public submit(): void {
     if (this.form.valid) {
       this.formError = false;
 
       this.authService
         .login(this.form.value.email!, this.form.value.password!)
         .subscribe({
-          next: (response: any) => {
+          next: (response) => {
             this.authService.setToken(response.token);
             this.router.navigate(['/browse']);
           },
-          error: (error: any) => {
+          error: (error) => {
             console.error('There was an error!', error);
             this.formError = true;
           },

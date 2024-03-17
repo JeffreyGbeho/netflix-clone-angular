@@ -10,7 +10,7 @@ export const routes: Routes = [
   { path: 'profiles', redirectTo: '/profiles/manage', pathMatch: 'full' },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/browse',
     pathMatch: 'full',
   },
   {
