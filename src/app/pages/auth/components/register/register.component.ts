@@ -36,7 +36,7 @@ export class RegisterComponent {
         .register(this.form.value.email!, this.form.value.password!)
         .subscribe((response: any) => {
           this.authService.setToken(response.token);
-          this.router.navigate(['/profiles']);
+          this.router.navigate(['/browse']);
         });
     }
   }

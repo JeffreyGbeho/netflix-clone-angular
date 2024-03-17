@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { ProfileService } from '../../../../shared/services/profile.service';
@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './manage-profile.component.scss',
 })
 export class ManageProfileComponent implements OnInit {
+  @Input() manageProfile: boolean = true;
+  @Output() refreshBrowsePage: EventEmitter<any> = new EventEmitter();
+
   public profiles: any[] = [];
   faCirclePlus = faCirclePlus;
   faEdit = faPencil;
@@ -26,6 +29,8 @@ export class ManageProfileComponent implements OnInit {
   constructor(private router: Router, private profileService: ProfileService) {}
 
   ngOnInit(): void {
+    localStorage.removeItem('profile');
+
     this.profileService.getProfiles().subscribe((data) => {
       console.log(data);
       this.profiles = data;
@@ -34,5 +39,14 @@ export class ManageProfileComponent implements OnInit {
 
   public addProfile() {
     this.router.navigate(['/profiles/add']);
+  }
+
+  public handleProfile(profile: any) {
+    if (this.manageProfile) {
+      this.router.navigate(['/profiles', profile.id]);
+    } else {
+      localStorage.setItem('profile', JSON.stringify(profile));
+      this.refreshBrowsePage.emit(profile);
+    }
   }
 }

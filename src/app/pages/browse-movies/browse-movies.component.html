@@ -1,4 +1,8 @@
-<app-header class="relative z-10"></app-header>
+@if (profile) {
+<app-header
+  class="relative z-10"
+  [profileThumbnail]="profile.pictureUrl"
+></app-header>
 
 <main class="bg-[#141414]">
   @if (movieTrending) {
@@ -38,3 +42,12 @@
     </div>
   </section>
 </main>
+} @else {
+<main class="bg-[#141414] w-screen h-screen flex items-center justify-center">
+  <app-manage-profile
+    [manageProfile]="false"
+    (refreshBrowsePage)="setProfile($event)"
+  ></app-manage-profile>
+</main>
+
+}

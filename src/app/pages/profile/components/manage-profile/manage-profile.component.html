@@ -1,23 +1,25 @@
 <section>
-  <h1 class="text-center font-bold text-white text-4xl">Manage Profiles :</h1>
+  <h1 class="text-center font-bold text-white text-4xl">
+    {{ manageProfile ? "Manage Profiles :" : "Who's Watching ?" }}
+  </h1>
 
   <div class="my-8">
     <ul class="flex justify-center gap-8">
       @for (profile of profiles; track profile.name) {
       <li class="text-center">
-        <a
-          [routerLink]="['/profiles/edit', profile.id]"
-          class="group cursor-pointer"
-        >
+        <a (click)="handleProfile(profile)" class="group cursor-pointer">
           <div
             class="w-[150px] h-[150px] rounded-md border-4 border-transparent overflow-hidden bg-cover group-hover:border-[#808080]"
             [ngClass]="test(profile.pictureUrl)"
           >
+            @if (manageProfile) {
+
             <div
               class="bg-black bg-opacity-50 h-full w-full flex items-center justify-center"
             >
               <fa-icon [icon]="faEdit" class="text-4xl text-white"></fa-icon>
             </div>
+            }
           </div>
           <span
             class="inline-block mt-2 text-[#808080] group-hover:text-white"
@@ -45,10 +47,21 @@
   </div>
 
   <div class="text-center mt-16">
+    @if (manageProfile) {
+
     <button
       class="bg-white text-black px-6 py-2 hover:bg-[#e50914] hover:text-white"
+      routerLink="/browse"
     >
       Done
     </button>
+    } @else {
+    <button
+      class="bg-white text-black px-6 py-2 hover:bg-[#e50914] hover:text-white"
+      routerLink="/profiles/manage"
+    >
+      Manage Profiles
+    </button>
+    }
   </div>
 </section>

@@ -41,7 +41,7 @@ export class LoginComponent {
         .subscribe({
           next: (response: any) => {
             this.authService.setToken(response.token);
-            this.router.navigate(['/profiles']);
+            this.router.navigate(['/browse']);
           },
           error: (error: any) => {
             console.error('There was an error!', error);
