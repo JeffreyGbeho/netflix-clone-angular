@@ -58,4 +58,12 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard],
   },
+  {
+    path: 'watch/:id',
+    loadComponent: () =>
+      import('./pages/watch-movie/watch-movie.component').then(
+        (m) => m.WatchMovieComponent
+      ),
+    canActivate: [authGuard],
+  },
 ];

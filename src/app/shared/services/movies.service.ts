@@ -21,4 +21,11 @@ export class MoviesService {
       }
     );
   }
+
+  public getMovieById(id: string): Observable<any> {
+    return this.http.get(`http://localhost:8080/api/v1/movie/streaming/${id}`, {
+      responseType: 'blob',
+      observe: 'response',
+    });
+  }
 }

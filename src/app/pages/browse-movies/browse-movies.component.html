@@ -8,6 +8,7 @@
       [src]="videoData"
       class="w-full h-full object-cover z-1"
       autoplay
+      muted
     ></video>
     <div class="banner-movie-info px-8">
       <h1 class="text-8xl font-bold text-white">{{ movieTrending.title }}</h1>
@@ -35,7 +36,7 @@
     <div class="flex gap-2">
       @if (movies) { @for (movie of movies; track $index) {
       <div class="w-[20%]">
-        <a [routerLink]="[movie.id]">
+        <a [routerLink]="['/watch', movie.id]">
           <img [src]="movie.thumbnailUrl" alt="" />
         </a>
       </div>
