@@ -1,28 +1,43 @@
 <app-header class="relative z-10"></app-header>
 
 <main class="bg-[#141414]">
+  @if (movieTrending) {
   <div class="relative overflow-hidden w-full h-[80vh]">
-    <video [src]="videoData" class="w-full h-full object-cover z-1"></video>
+    <video
+      id="videoTrending"
+      [src]="videoData"
+      class="w-full h-full object-cover z-1"
+      autoplay
+    ></video>
     <div class="banner-movie-info px-8">
-      <h1 class="text-8xl font-bold text-white">Movie title</h1>
-      <p class="text-white">Movie description</p>
-      <div class="flex gap-4">
+      <h1 class="text-8xl font-bold text-white">{{ movieTrending.title }}</h1>
+      <p class="text-white mt-4">{{ movieTrending.description }}</p>
+      <div class="flex gap-4 mt-8">
         <button class="bg-white text-black py-2 px-8 rounded-md font-bold">
           Play
         </button>
         <button class="bg-white text-black py-2 px-8 rounded-md font-bold">
           More Info
         </button>
+        <button
+          class="bg-white text-black py-2 px-8 rounded-md font-bold"
+          (click)="mutedTrendingMovie()"
+        >
+          Muted
+        </button>
       </div>
     </div>
   </div>
+  }
 
   <section class="px-8">
-    <h2 class="text-white">Title</h2>
+    <h2 class="text-white">Movies</h2>
     <div class="flex gap-2">
       @if (movies) { @for (movie of movies; track $index) {
-      <div class="w-[20%] bg-white">
-        <h2 class="text-black">{{ movie.title }}</h2>
+      <div class="w-[20%]">
+        <a [routerLink]="[movie.id]">
+          <img [src]="movie.thumbnailUrl" alt="" />
+        </a>
       </div>
       } }
     </div>
