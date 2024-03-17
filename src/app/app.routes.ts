@@ -53,8 +53,8 @@ export const routes: Routes = [
   {
     path: 'browse',
     loadComponent: () =>
-      import('./movie-list/movie-list.component').then(
-        (m) => m.MovieListComponent
+      import('./pages/browse-movies/browse-movies.component').then(
+        (m) => m.BrowseMoviesComponent
       ),
     canActivate: [authGuard],
   },

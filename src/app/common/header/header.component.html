@@ -1,0 +1,29 @@
+<header
+  class="px-8 py-2 flex items-center justify-between fixed w-full top-0 left-0"
+>
+  <div class="flex items-center">
+    <a [routerLink]="['/browse']"
+      ><img src="assets/images/logo_netflix.png" alt="Logo Netflix" width="100"
+    /></a>
+
+    <nav class="ml-8">
+      <ul class="flex items-center gap-4">
+        @for (link of links; track $index) {
+
+        <li>
+          <a [routerLink]="[link.path]" class="text-white">{{ link.label }}</a>
+        </li>
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="justify-end">
+    <img
+      src="assets/images/avatar.png"
+      alt="Avatar"
+      width="50"
+      class="rounded-full"
+    />
+  </div>
+</header>
