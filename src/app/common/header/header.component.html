@@ -18,12 +18,31 @@
     </nav>
   </div>
 
-  <div class="justify-end">
+  <div class="relative justify-end group/settings">
     <img
       src="assets/images/avatar.png"
       alt="Avatar"
       width="50"
-      class="rounded-full"
+      class="rounded-full cursor-pointer"
     />
+
+    <ul
+      class="bg-black absolute right-0 w-[250px] border-solid border-2 border-white hidden group-hover/settings:block"
+    >
+      <li class="text-white py-2 px-4 group">
+        <a routerLink="/profiles">
+          <div class="flex items-center">
+            <fa-icon [icon]="faEdit" class="text-xl mr-2"></fa-icon>
+            <span class="group-hover:underline">Manage Profiles</span>
+          </div>
+        </a>
+      </li>
+      <li
+        class="text-white py-2 px-4 text-center border-solid border-t-2 border-white hover:underline cursor-pointer"
+        (click)="logout()"
+      >
+        Sign out of Netflix
+      </li>
+    </ul>
   </div>
 </header>

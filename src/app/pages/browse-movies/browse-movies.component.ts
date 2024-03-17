@@ -21,7 +21,7 @@ export class BrowseMoviesComponent {
       console.log(response);
       this.movies = response;
       this.movieTrending = this.movies[0];
-      this.getMoviesByTitle('Spring');
+      this.getMovieById(this.movieTrending.id);
     });
   }
 
@@ -30,10 +30,17 @@ export class BrowseMoviesComponent {
     video.muted = !video.muted;
   }
 
-  private getMoviesByTitle(title: string): void {
-    this.movieService.getMoviesByTitle(title).subscribe((response) => {
+  private getMovieById(movieId: string): void {
+    this.movieService.getMovieById(movieId).subscribe((response) => {
       const videoBlob = new Blob([response.body], { type: 'video/mp4' });
-      this.videoData = URL.createObjectURL(videoBlob);
+      const videoData = URL.createObjectURL(videoBlob);
+      const video = document.getElementById(
+        'videoTrending'
+      ) as HTMLVideoElement;
+      video.src = videoData;
+      video.load();
+      video.play();
+      video.muted = true;
     });
   }
 }
