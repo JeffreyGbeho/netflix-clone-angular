@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,10 +21,9 @@ export class HeaderComponent {
 
   faEdit = faPencil;
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   public logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
+    this.authService.logout();
   }
 }

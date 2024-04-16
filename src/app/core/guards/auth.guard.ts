@@ -1,15 +1,19 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
+import { JwtTokenService } from '../../shared/services/jwt-token.service';
+import { LocalStorageService } from '../../shared/services/local-storage.service';
+import { JWT_TOKEN_KEY } from '../../shared/constants/global.constant';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router)
   const authService = inject(AuthService);
-  const token = authService.getToken();
+  const jwtService = inject(JwtTokenService);
+  const storageService = inject(LocalStorageService);
 
-  if (!token || !authService.isTokenValid(token)) {
-    localStorage.removeItem('JWT_TOKEN');
-    router.navigate(['/login']);
+  const token = storageService.getItem(JWT_TOKEN_KEY);
+
+  if (!token || !jwtService.isTokenValid(token)) {
+    authService.logout();
     return false;
   }
 

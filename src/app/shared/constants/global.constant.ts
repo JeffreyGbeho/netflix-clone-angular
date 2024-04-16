@@ -4,3 +4,4 @@ export const BG_URL =
 
 // Route paths
 export const PROFILE_MANAGE_PATH = 'profiles/manage';
+export const JWT_TOKEN_KEY = 'JWT_TOKEN';

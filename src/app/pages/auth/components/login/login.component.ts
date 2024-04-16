@@ -9,6 +9,8 @@ import {
 import { AuthService } from '../../../../shared/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FloatingInputLabelDirective } from '../../../../shared/directives/floating-input-label.directive';
+import { LocalStorageService } from '../../../../shared/services/local-storage.service';
+import { JWT_TOKEN_KEY } from '../../../../shared/constants/global.constant';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +32,11 @@ export class LoginComponent {
 
   public formError: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private storage: LocalStorageService
+  ) {}
 
   public submit(): void {
     if (this.form.valid) {
@@ -40,7 +46,7 @@ export class LoginComponent {
         .login(this.form.value.email!, this.form.value.password!)
         .subscribe({
           next: (response) => {
-            this.authService.setToken(response.token);
+            this.storage.setItem(JWT_TOKEN_KEY, response.token);
             this.router.navigate(['/browse']);
           },
           error: (error) => {
