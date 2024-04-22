@@ -1,73 +1,19 @@
-<main>
-  @if (movieTrending) {
-  <div class="relative overflow-hidden w-full h-[80vh]">
-    <video id="videoTrending" class="w-full h-full object-cover z-1"></video>
-    <div class="banner-movie-info px-8">
-      <h1 class="text-8xl font-bold text-white">{{ movieTrending.title }}</h1>
-      <p class="text-white mt-4">{{ movieTrending.description }}</p>
-      <div class="flex gap-4 mt-8">
-        <button
-          class="bg-white text-black py-2 px-8 rounded-md font-bold"
-          (click)="onWatchMovie(movieTrending.id)"
-        >
-          Play
-        </button>
-        <button class="bg-white text-black py-2 px-8 rounded-md font-bold">
-          More Info
-        </button>
-        <button
-          class="bg-white text-black py-2 px-8 rounded-md font-bold"
-          (click)="mutedTrendingMovie()"
-        >
-          Muted
-        </button>
-      </div>
-    </div>
-  </div>
+@if (movieTrending) {
+<app-frontpage-movie [frontPageMovie]="movieTrending"></app-frontpage-movie>
+}
+
+<main class="px-8 mt-[-100px] z-30 relative">
+  @if ((profile?.favourites?.length || 0) > 0) {
+  <app-movies-section
+    [titleSection]="'My List'"
+    [movies]="profile?.favourites"
+    [profile]="profile"
+  ></app-movies-section>
   }
 
-  <section class="px-8 mt-[-100px] z-30 relative">
-    <h2 class="text-white text-2xl font-bold mb-4">Movies</h2>
-    <div class="flex gap-2">
-      @for (movie of movies; track $index) {
-      <div movieAnimation class="movie-card w-[20%] animation">
-        <a [routerLink]="['/watch', movie.id]">
-          <img [src]="movie.thumbnailUrl" alt="" />
-        </a>
-        <div class="content-card animation p-2 bg-[#333]">
-          <div class="flex justify-between text-2xl">
-            <div class="flex gap-2 align-center">
-              <button (click)="onWatchMovie(movie.id)">
-                <fa-icon [icon]="faCirclePlay" class="text-white"></fa-icon>
-              </button>
-              <button>
-                @if (isFavorite(movie)) {
-                <fa-icon
-                  [icon]="faCircleCheck"
-                  class="text-white"
-                  (click)="removeMovieToFavorites(movie)"
-                ></fa-icon>
-                } @else {
-                <fa-icon
-                  [icon]="faCirclePlus"
-                  class="text-white"
-                  (click)="addMovieToFavorites(movie)"
-                ></fa-icon>
-                }
-              </button>
-            </div>
-            <div>
-              <button>
-                <fa-icon
-                  [icon]="faCircleChevronDown"
-                  class="text-white"
-                ></fa-icon>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      }
-    </div>
-  </section>
+  <app-movies-section
+    [titleSection]="'Movies'"
+    [movies]="movies"
+    [profile]="profile"
+  ></app-movies-section>
 </main>

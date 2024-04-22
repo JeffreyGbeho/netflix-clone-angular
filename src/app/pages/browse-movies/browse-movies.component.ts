@@ -17,6 +17,8 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Profile } from '../../shared/models/profile.model';
 import { ProfileService } from '../../shared/services/profile.service';
+import { FrontpageMovieComponent } from './components/frontpage-movie/frontpage-movie.component';
+import { MoviesSectionComponent } from './components/movies-section/movies-section.component';
 
 @Component({
   selector: 'app-browse-movies',
@@ -28,6 +30,8 @@ import { ProfileService } from '../../shared/services/profile.service';
     ManageProfileComponent,
     MovieCardHoverDirective,
     FontAwesomeModule,
+    FrontpageMovieComponent,
+    MoviesSectionComponent,
   ],
   templateUrl: './browse-movies.component.html',
   styleUrl: './browse-movies.component.scss',
@@ -53,11 +57,6 @@ export class BrowseMoviesComponent {
     });
 
     this.loadMovies();
-  }
-
-  public mutedTrendingMovie(): void {
-    const video = document.getElementById('videoTrending') as HTMLVideoElement;
-    video.muted = !video.muted;
   }
 
   public onWatchMovie(movieId: number): void {
@@ -91,23 +90,6 @@ export class BrowseMoviesComponent {
       this.movies = response;
 
       this.movieTrending = this.movies[0];
-      this.getMovieById(this.movieTrending?.id);
     });
-  }
-
-  private getMovieById(movieId?: number): void {
-    this.movieService.getMovieById(movieId).subscribe((response) => {
-      const videoBlob = new Blob([response.body], { type: 'video/mp4' });
-      this.loadMovieInBanner(URL.createObjectURL(videoBlob));
-    });
-  }
-
-  private loadMovieInBanner(videoData: string): void {
-    const video = document.getElementById('videoTrending') as HTMLVideoElement;
-    video.src = videoData;
-    video.load();
-    video.play();
-    video.muted = true;
-    video.loop = true;
   }
 }

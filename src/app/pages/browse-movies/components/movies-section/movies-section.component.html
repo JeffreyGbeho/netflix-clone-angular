@@ -1,0 +1,44 @@
+<section>
+  <h2 class="text-white text-2xl font-bold mb-4">{{ titleSection }}</h2>
+  <div class="flex gap-2 h-fit">
+    @for (movie of movies; track $index) {
+    <div movieAnimation class="movie-card w-[20%] animation">
+      <a [routerLink]="['/watch', movie.id]">
+        <img [src]="movie.thumbnailUrl" alt="" />
+      </a>
+      <div class="content-card animation p-2 bg-[#333]">
+        <div class="flex justify-between text-2xl">
+          <div class="flex gap-2 align-center">
+            <button (click)="onWatchMovie(movie.id)">
+              <fa-icon [icon]="faCirclePlay" class="text-white"></fa-icon>
+            </button>
+            <button>
+              @if (isFavorite(movie)) {
+              <fa-icon
+                [icon]="faCircleCheck"
+                class="text-white"
+                (click)="removeMovieToFavorites(movie)"
+              ></fa-icon>
+              } @else {
+              <fa-icon
+                [icon]="faCirclePlus"
+                class="text-white"
+                (click)="addMovieToFavorites(movie)"
+              ></fa-icon>
+              }
+            </button>
+          </div>
+          <div>
+            <button>
+              <fa-icon
+                [icon]="faCircleChevronDown"
+                class="text-white"
+              ></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</section>
