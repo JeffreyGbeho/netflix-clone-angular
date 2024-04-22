@@ -1,9 +1,3 @@
-@if (profile) {
-<app-header
-  class="relative z-10"
-  [profileThumbnail]="profile.pictureUrl"
-></app-header>
-
 <main>
   @if (movieTrending) {
   <div class="relative overflow-hidden w-full h-[80vh]">
@@ -12,7 +6,10 @@
       <h1 class="text-8xl font-bold text-white">{{ movieTrending.title }}</h1>
       <p class="text-white mt-4">{{ movieTrending.description }}</p>
       <div class="flex gap-4 mt-8">
-        <button class="bg-white text-black py-2 px-8 rounded-md font-bold">
+        <button
+          class="bg-white text-black py-2 px-8 rounded-md font-bold"
+          (click)="onWatchMovie(movieTrending.id)"
+        >
           Play
         </button>
         <button class="bg-white text-black py-2 px-8 rounded-md font-bold">
@@ -32,22 +29,45 @@
   <section class="px-8 mt-[-100px] z-30 relative">
     <h2 class="text-white text-2xl font-bold mb-4">Movies</h2>
     <div class="flex gap-2">
-      @if (movies) { @for (movie of movies; track $index) {
-      <div class="w-[20%]">
+      @for (movie of movies; track $index) {
+      <div movieAnimation class="movie-card w-[20%] animation">
         <a [routerLink]="['/watch', movie.id]">
           <img [src]="movie.thumbnailUrl" alt="" />
         </a>
+        <div class="content-card animation p-2 bg-[#333]">
+          <div class="flex justify-between text-2xl">
+            <div class="flex gap-2 align-center">
+              <button (click)="onWatchMovie(movie.id)">
+                <fa-icon [icon]="faCirclePlay" class="text-white"></fa-icon>
+              </button>
+              <button>
+                @if (isFavorite(movie)) {
+                <fa-icon
+                  [icon]="faCircleCheck"
+                  class="text-white"
+                  (click)="removeMovieToFavorites(movie)"
+                ></fa-icon>
+                } @else {
+                <fa-icon
+                  [icon]="faCirclePlus"
+                  class="text-white"
+                  (click)="addMovieToFavorites(movie)"
+                ></fa-icon>
+                }
+              </button>
+            </div>
+            <div>
+              <button>
+                <fa-icon
+                  [icon]="faCircleChevronDown"
+                  class="text-white"
+                ></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      } }
+      }
     </div>
   </section>
 </main>
-} @else {
-<main class="bg-[#141414] w-screen h-screen flex items-center justify-center">
-  <app-manage-profile
-    [manageProfile]="false"
-    (refreshBrowsePage)="setProfile($event)"
-  ></app-manage-profile>
-</main>
-
-}

@@ -48,10 +48,10 @@ export class ManageProfileComponent implements OnInit {
   }
 
   public handleProfile(profile: Profile): void {
-    if (this.manageProfile) {
+    if (this.manageProfile || !profile?.id) {
       this.router.navigate(['/profiles/edit', profile.id]);
     } else {
-      localStorage.setItem('profile', JSON.stringify(profile));
+      localStorage.setItem('profile', profile.id.toString());
       this.refreshBrowsePage.emit(profile);
     }
   }

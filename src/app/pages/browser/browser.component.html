@@ -1,0 +1,15 @@
+@if (profile) {
+<app-header
+  class="relative z-10"
+  [profileThumbnail]="profile.pictureUrl"
+></app-header>
+
+<app-browse-movies></app-browse-movies>
+} @else {
+<main class="bg-[#141414] w-screen h-screen flex items-center justify-center">
+  <app-manage-profile
+    [manageProfile]="false"
+    (refreshBrowsePage)="loadProfile()"
+  ></app-manage-profile>
+</main>
+}
