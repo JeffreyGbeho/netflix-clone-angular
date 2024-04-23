@@ -30,6 +30,7 @@ export class ManageProfileComponent implements OnInit {
   constructor(private router: Router, private profileService: ProfileService) {}
 
   ngOnInit(): void {
+    this.profileService.activeProfile.next(null);
     localStorage.removeItem('profile');
 
     this.profileService.getProfiles().subscribe((response) => {

@@ -19,6 +19,7 @@ import { Profile } from '../../shared/models/profile.model';
 import { ProfileService } from '../../shared/services/profile.service';
 import { FrontpageMovieComponent } from './components/frontpage-movie/frontpage-movie.component';
 import { MoviesSectionComponent } from './components/movies-section/movies-section.component';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-browse-movies',
@@ -32,6 +33,7 @@ import { MoviesSectionComponent } from './components/movies-section/movies-secti
     FontAwesomeModule,
     FrontpageMovieComponent,
     MoviesSectionComponent,
+    DialogComponent,
   ],
   templateUrl: './browse-movies.component.html',
   styleUrl: './browse-movies.component.scss',

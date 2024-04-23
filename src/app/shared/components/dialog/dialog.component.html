@@ -1,0 +1,53 @@
+<ng-container *ngIf="display$ | async as display">
+  <section [class.open]="display === 'open'" (click)="close()">
+    <div (click)="$event.stopPropagation()">
+      <button class="close z-10" type="button" (click)="close()">
+        <fa-icon [icon]="faXmark" class="text-[#333] text-2xl"></fa-icon>
+      </button>
+
+      <ng-container *ngIf="data$ | async as data">
+        <div class="relative z-0">
+          <img [src]="data.thumbnailUrl" alt="" />
+
+          <div class="absolute left-4 bottom-8 flex gap-2">
+            <button
+              class="bg-white text-black py-2 px-8 rounded-md font-bold"
+              (click)="onWatchMovie(data.id)"
+            >
+              Play
+            </button>
+
+            <button>
+              @if (isFavorite(data)) {
+              <fa-icon
+                [icon]="faCircleCheck"
+                class="text-white text-4xl"
+                (click)="removeMovieToFavorites(data)"
+              ></fa-icon>
+              } @else {
+              <fa-icon
+                [icon]="faCirclePlus"
+                class="text-white text-4xl"
+                (click)="addMovieToFavorites(data)"
+              ></fa-icon>
+              }
+            </button>
+          </div>
+        </div>
+        <div class="p-4 flex">
+          <div class="w-[66%]">
+            <h2 class="text-white text-xl uppercase font-bold">
+              {{ data.title }}
+            </h2>
+            <p class="text-white">{{ data.description }}</p>
+          </div>
+
+          <div class="w-[33%]">
+            <label>Director : </label>
+            <span class="text-white">{{ data.author }}</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</ng-container>

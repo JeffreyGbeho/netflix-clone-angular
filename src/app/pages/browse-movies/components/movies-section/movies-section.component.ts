@@ -14,6 +14,7 @@ import { MoviesService } from '../../../../shared/services/movies.service';
 import { ProfileService } from '../../../../shared/services/profile.service';
 import { Profile } from '../../../../shared/models/profile.model';
 import { MovieCardHoverDirective } from '../../../../shared/directives/movie-card-hover.directive';
+import { DialogService } from '../../../../shared/components/dialog/services/dialog.service';
 
 @Component({
   selector: 'app-movies-section',
@@ -40,7 +41,8 @@ export class MoviesSectionComponent {
   constructor(
     private router: Router,
     private movieService: MoviesService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private dialogService: DialogService
   ) {}
 
   public onWatchMovie(movieId: number): void {
@@ -65,5 +67,9 @@ export class MoviesSectionComponent {
 
   public isFavorite(movie: Movie): boolean {
     return this.profile?.favourites.some((m) => m.id === movie.id) || false;
+  }
+
+  public onDisplayMovieDetails(movie: Movie): void {
+    this.dialogService.open(movie);
   }
 }
