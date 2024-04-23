@@ -42,10 +42,6 @@ export class DialogComponent implements OnInit {
     this.display$ = this.dialogService.watch();
     this.data$ = this.dialogService.getData();
 
-    this.data$.subscribe((data) => {
-      console.log(data);
-    });
-
     this.profileService.activeProfile.subscribe((profile) => {
       this.profile = profile;
     });

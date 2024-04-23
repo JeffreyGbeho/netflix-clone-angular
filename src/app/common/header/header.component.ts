@@ -16,7 +16,7 @@ export class HeaderComponent {
 
   public links = [
     { path: '/browse', label: 'Home' },
-    { path: '/profiles', label: 'My List' },
+    { path: '/my-list', label: 'My List' },
   ];
 
   faEdit = faPencil;

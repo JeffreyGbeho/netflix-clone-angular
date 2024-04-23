@@ -5,6 +5,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { ManageProfileComponent } from './pages/profile/components/manage-profile/manage-profile.component';
 import { CreateProfileComponent } from './pages/profile/components/create-profile/create-profile.component';
 import { EditProfileComponent } from './pages/profile/components/edit-profile/edit-profile.component';
+import { MyListComponent } from './pages/my-list/my-list.component';
 
 export const routes: Routes = [
   { path: 'profiles', redirectTo: '/profiles/manage', pathMatch: 'full' },
@@ -63,6 +64,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/watch-movie/watch-movie.component').then(
         (m) => m.WatchMovieComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'my-list',
+    loadComponent: () =>
+      import('./pages/my-list/my-list.component').then(
+        (m) => m.MyListComponent
       ),
     canActivate: [authGuard],
   },

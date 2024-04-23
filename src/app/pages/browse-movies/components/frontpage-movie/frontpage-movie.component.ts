@@ -3,18 +3,35 @@ import { Movie } from '../../../../shared/models/movie.model';
 import { Router } from '@angular/router';
 import { MoviesService } from '../../../../shared/services/movies.service';
 import { After } from 'v8';
+import { DialogService } from '../../../../shared/components/dialog/services/dialog.service';
+import {
+  IconDefinition,
+  faVolumeHigh,
+  faVolumeOff,
+  faVolumeXmark,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-frontpage-movie',
   standalone: true,
-  imports: [],
+  imports: [FontAwesomeModule],
   templateUrl: './frontpage-movie.component.html',
   styleUrl: './frontpage-movie.component.scss',
 })
 export class FrontpageMovieComponent implements AfterViewInit {
   @Input() frontPageMovie!: Movie;
 
-  constructor(private router: Router, private movieService: MoviesService) {}
+  public videoMuted: boolean = true;
+
+  public faVolumeOn: IconDefinition = faVolumeHigh;
+  public faVolumeOff: IconDefinition = faVolumeXmark;
+
+  constructor(
+    private router: Router,
+    private movieService: MoviesService,
+    private dialogService: DialogService
+  ) {}
 
   ngAfterViewInit(): void {
     this.getMovieById(this.frontPageMovie.id);
@@ -22,7 +39,8 @@ export class FrontpageMovieComponent implements AfterViewInit {
 
   public mutedMovie(): void {
     const video = document.getElementById('videoTrending') as HTMLVideoElement;
-    video.muted = !video.muted;
+    this.videoMuted = !this.videoMuted;
+    video.muted = this.videoMuted;
   }
 
   // TODO: Move this method to a service
@@ -42,7 +60,11 @@ export class FrontpageMovieComponent implements AfterViewInit {
     video.src = videoData;
     video.load();
     video.play();
-    video.muted = true;
+    video.muted = this.videoMuted;
     video.loop = true;
+  }
+
+  public onDisplayMovieDetails(movie: Movie): void {
+    this.dialogService.open(movie);
   }
 }

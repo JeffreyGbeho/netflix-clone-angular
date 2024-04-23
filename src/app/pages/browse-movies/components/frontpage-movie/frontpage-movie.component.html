@@ -1,24 +1,32 @@
 <div class="relative overflow-hidden w-full h-[80vh]">
   <video id="videoTrending" class="w-full h-full object-cover z-1"></video>
-  <div class="banner-movie-info px-8">
+  <div class="banner-movie-info px-8 w-full">
     <h1 class="text-8xl font-bold text-white">{{ frontPageMovie.title }}</h1>
     <p class="text-white mt-4">{{ frontPageMovie.description }}</p>
-    <div class="flex gap-4 mt-8">
-      <button
-        class="bg-white text-black py-2 px-8 rounded-md font-bold"
-        (click)="onWatchMovie(frontPageMovie.id)"
-      >
-        Play
-      </button>
-      <button class="bg-white text-black py-2 px-8 rounded-md font-bold">
-        More Info
-      </button>
-      <button
-        class="bg-white text-black py-2 px-8 rounded-md font-bold"
-        (click)="mutedMovie()"
-      >
-        Muted
-      </button>
+    <div class="w-full flex items-center justify-between mt-8">
+      <div class="flex gap-4">
+        <button
+          class="bg-white text-black py-2 px-8 rounded-md font-bold"
+          (click)="onWatchMovie(frontPageMovie.id)"
+        >
+          Play
+        </button>
+        <button
+          class="bg-white text-black py-2 px-8 rounded-md font-bold"
+          (click)="onDisplayMovieDetails(frontPageMovie)"
+        >
+          More Info
+        </button>
+      </div>
+      <div>
+        <button class="text-2xl" (click)="mutedMovie()">
+          @if (videoMuted) {
+          <fa-icon [icon]="faVolumeOn" class="text-white"></fa-icon>
+          } @else {
+          <fa-icon [icon]="faVolumeOff" class="text-white"></fa-icon>
+          }
+        </button>
+      </div>
     </div>
   </div>
 </div>
